@@ -2,23 +2,26 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
 
+from products.models import Categories
 
-# Create your views here.
-# Controller
 
 def index(request) -> HttpResponse:
-    context: dict[str, str] = {
+    
+    categories = Categories.objects.all()
+    
+    context = {
         'title': 'home',
         'content': 'Main page',
+        'categories': categories,
        
-        'datetime': datetime.datetime.now()
+        'datetime': datetime.datetime.now(),
     }
     return render(request, 'main/index.html', context)
 
 
 
 def about(request) -> HttpResponse:
-    context: dict[str, str] = {
+    context = {
         'title': 'About',
         'content': 'About page',
         'about_as': 'About as'
